@@ -15,6 +15,8 @@ mujer(ling).
 
 padre(abraham, homero).
 padre(abraham, herbert).
+
+madre(mona, herbert)
 madre(mona, homero).
 
 madre(jacqueline, marge).
@@ -39,4 +41,14 @@ madre(selma, ling).
 progenitor(X,Y) :- padre(X,Y).
 progenitor(X,Y) :- madre(X,Y).
 
-hijo(X,Y) :- 
+hijo(X,Y) :- hombre(X) , progenitor(Y,X).
+hijo(X,Y) :- mujer(X) , progenitor(Y,X).
+
+abuelo(X,Y) :- padre(X,Z) , progenitor(Z,Y).
+abuela(X,Y) :- madre(X,Z) , progenitor(Z,Y).
+
+hermano(X,Y) :- hombre(X) , progenitor(Z,X) , progenitor(Z,Y).
+hermana(X,Y) :- mujer(X) , progenitor(Z,X) , progenitor(Z,Y).
+
+tio(X,Y) :- hermano(X,Z), progenitor(Z,Y).
+tia(X,Y) :- hermana(X,Z), progenitor(Z,Y).
